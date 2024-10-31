@@ -138,7 +138,7 @@ public class AdoDapper : IAdo
 
         //Obtengo el valor de parametro de tipo salida
         producto.IdProducto = parametros.Get<short>("@unIdProducto");
-    }
+    }   
     public Producto? ObtenerProducto(short idProducto)
     {
         using (var multi = _conexion.QueryMultiple(_queryProducto, new { id = idProducto }))
@@ -146,7 +146,7 @@ public class AdoDapper : IAdo
             var producto = multi.ReadSingleOrDefault<Producto>();
             if (producto is not null)
             {
-                producto.Categoria = multi.ReadSingle<Categoria>();
+                producto.Categoria = multi.ReadSingle<producto>();
                 producto.Precios = multi.Read<HistorialPrecio>().ToList();
                 producto.Ingresos = multi.Read<IngresoStock>().ToList();
             }
